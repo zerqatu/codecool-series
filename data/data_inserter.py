@@ -3,7 +3,7 @@ import os
 import sys
 
 import requests
-from psycopg2 import DataError
+from psycopg import DataError
 
 import init_db
 from data_manager import execute_select, execute_dml_statement

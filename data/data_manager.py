@@ -1,6 +1,6 @@
 import os
-import psycopg2
-import psycopg2.extras
+import psycopg
+import psycopg.rows
 
 
 def establish_connection(connection_data=None):
@@ -18,9 +18,9 @@ def establish_connection(connection_data=None):
                                                                      connection_data['user'],
                                                                      connection_data['host'],
                                                                      connection_data['password'])
-        conn = psycopg2.connect(connect_str)
+        conn = psycopg.connect(connect_str)
         conn.autocommit = True
-    except psycopg2.DatabaseError as e:
+    except psycopg.DatabaseError as e:
         print("Cannot connect to database.")
         print(e)
     else:
@@ -98,7 +98,7 @@ def execute_select(statement, variables=None, fetchall=True):
     variables:  optional parameter dict, optional parameter fetchall"""
     result_set = []
     with establish_connection() as conn:
-        with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
+        with conn.cursor(cursor_factory=psycopg.rows.dict_row) as cursor:
             cursor.execute(statement, variables)
             result_set = cursor.fetchall() if fetchall else cursor.fetchone()
     return result_set
@@ -117,6 +117,6 @@ def execute_dml_statement(statement, variables=None):
             cursor.execute(statement, variables)
             try:
                 result = cursor.fetchone()
-            except psycopg2.ProgrammingError as pe:
+            except psycopg.ProgrammingError as pe:
                 pass
     return result
