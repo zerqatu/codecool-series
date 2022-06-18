@@ -98,7 +98,7 @@ def execute_select(statement, variables=None, fetchall=True):
     variables:  optional parameter dict, optional parameter fetchall"""
     result_set = []
     with establish_connection() as conn:
-        with conn.cursor(cursor_factory=psycopg.rows.dict_row) as cursor:
+        with conn.cursor(row_factory=psycopg.rows.dict_row) as cursor:
             cursor.execute(statement, variables)
             result_set = cursor.fetchall() if fetchall else cursor.fetchone()
     return result_set
