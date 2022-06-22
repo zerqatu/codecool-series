@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+    <section>
+        <h1 class="title text-center">Birthday actors</h1>
+        <div class="card">
+            <p>Create a birthday-actors route which displays the first 100 alive actors (ordered by birthday).</p>
+            <p>When you hover the cursor over an actor or actress,
+                their birthday is displayed as a tooltip.</p>
+            <p>The tooltip has a grey background when the day of birth
+                is even and green background when it is odd.</p>
+        </div>
+        <div class="card">
+            <ul>
+                {% for actor in actors %}
+                    <li>
+                        <div class="tooltip">{{ actor.name }}
+                            <span class="tooltiptext {% if actor.day % 2 == 0 %}birthday-even{% endif %}">{{ actor.day }}</span>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+{% endblock %}

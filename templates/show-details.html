@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+    <section>
+        <h1 class="title text-center">{{ show.title }}</h1>
+        <div class="card detailed-view">
+            <div class="row">
+                {% if show.trailer %}
+                    <iframe src="https://www.youtube.com/embed/{{ show.trailer.split("=")[1] }}" height="270"
+                            width="480" class="poster col col-third">
+                    </iframe>
+                {% endif %}
+                <div class="col col-twothird">
+                    <p class="small grayed">
+                        {{ show.genres }}<span class="separator">|</span>
+                        {{ show.rating }} &#9733;<span class="separator">|</span>
+                        {{ show.runtime }} min<span class="separator">|</span>
+                        {{ show.year }}
+                    </p>
+                    <p>{{ show.overview }}</p>
+                </div>
+            </div>
+            <div>
+                <p><b>Top actors:</b>&nbsp;{{ show.top_actors }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <h2>Seasons</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Overview</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for season in seasons %}
+                    <tr>
+                        <td>{{ season.season_number }}</td>
+                        <td>{{ season.title }}</td>
+                        <td>{{ season.overview }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+{% endblock %}

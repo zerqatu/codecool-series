@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+    <section>
+        <h1 class="title text-center">Average ratings</h1>
+        <div class="card">
+            <p>Create a ratings route that displays in a table
+                the names of the first ten shows
+                (ordered by actor count descending)
+                and by how much each show is above or below
+                the average rating of all the shows in the DB.</p>
+        </div>
+        <div class="card detailed-view">
+            <div class="row">
+                <div class="card">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Show</th>
+                            <th>Actor count</th>
+                            <th>Rating</th>
+                            <th>Difference</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for show in ratings %}
+                            <tr>
+                                <td>{{ show.title }}</td>
+                                <td>{{ show.actor_count }}</td>
+                                <td>{{ show.rating }}</td>
+                                <td>
+                                    {% if show.difference > 0 %}
+                                        +{{ show.difference }}
+                                    {% else %}
+                                        {{ show.difference }}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

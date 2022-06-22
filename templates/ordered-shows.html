@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+    <section>
+        <h1 class="title text-center">Ordered shows</h1>
+        <div class="card">
+            <p>Create an ordered-shows route that displays the names
+                of the first ten shows (ordered by episode count)
+                and their rounded rating in * (3.7 is ****).</p>
+            <p>Clicking the name header of the table in which
+                the shows are displayed toggles the ascending or
+                descending order of the shows from the database
+                (when descending that last 10 shows ordered from the DB).</p>
+        </div>
+        <div class="row">
+            <div class="card">
+                <table>
+                    <thead>
+                    <tr>
+                        <th id="ordered-shows-title">Show</th>
+                        <th>Episode count</th>
+                        <th>Rating</th>
+                    </tr>
+                    </thead>
+                    <tbody id="ordered-shows-table-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <script src="/static/js/ordered-shows.js"></script>
+{% endblock %}

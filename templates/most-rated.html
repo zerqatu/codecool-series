@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block content %}
+    <section>
+        <h1 class="title text-center">Shows</h1>
+        <div class="card">
+            <h2>Most rated shows</h2>
+            <p>Create a page accessible from the path /shows/most-rated,
+                where the fifteen highest rated shows are displayed in a table,
+                showing the highest rated one first.</p>
+            <p>Display the title (make it a link to the /show/id URL), release year, average runtime length, rating
+                (formatted as "9.2"), genres (in alphabetical order, separated by commas), and a link to the trailer and
+                the homepage of the show (or the "No URL" string if there is no URL associated).</p>
+            <p>Create a pagination to the table on the /shows/most-rated route to
+                allow the user to see the lower rated shows.</p>
+            <p>Make the table on the /shows/most-rated page sortable by the
+                title, year, runtime, and rating columns.
+                The user can sort the table by clicking the column header
+                (by default, the table is sorted by rating).
+                If the user clicks the already selected column,
+                the sorting order is reversed. Indicate the sorting order
+                next to the column header with arrows (such as ⇩, ⇧).
+                Make this page accessible on the path /shows as well.</p>
+        </div>
+        <div class="card">
+            <table>
+                <thead>
+                <tr>
+                    {% for header in headers %}
+                        <th>
+                            <a href="?page={{ current_page }}&order-by={{ header }}&order-type={% if order_type == "asc" %}desc{% else %}asc{% endif %}">
+                                {{ header }}
+                                {% if order_by == header %}
+                                    {% if order_type == "asc" %}
+                                        &#8679;
+                                    {% else %}
+                                        &#8681;
+                                    {% endif %}
+                                {% endif %}
+                            </a>
+                        </th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for show in shows %}
+                    <tr>
+                        <td><a href="/show/{{ show.id }}">{{ show.title }}</a></td>
+                        <td>{{ show.year }}</td>
+                        <td>{{ show.runtime }}</td>
+                        <td>{{ show.rating }}</td>
+                        <td>{{ show.genres }}</td>
+                        <td>{% if show.trailer %}<a href="{{ show.trailer }}" target="_blank">Trailer</a>{% else %}No
+                            URL{% endif %}</td>
+                        <td>{% if show.homepage %}<a href="{{ show.homepage }}" target="_blank">Homepage</a>{% else %}No
+                            URL{% endif %}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="card">
+            <p>
+                {% if current_page != 0 %}
+                    <a href="?page={{ current_page - 1 }}&order-by={{ order_by }}&order-type={{ order_type }}"><b>«</b></a>
+                {% else %}
+                    <b>«</b>
+                {% endif %}
+                {% for x in range(last_page) %}
+                    {% if x == current_page %}
+                        <a href="?page={{ x }}&order-by={{ order_by }}&order-type={{ order_type }}">
+                            <mark>{{ x }}</mark>
+                        </a>
+                    {% else %}
+                        <a href="?page={{ x }}&order-by={{ order_by }}&order-type={{ order_type }}">{{ x }}</a>
+                    {% endif %}
+                {% endfor %}
+                {% if current_page != last_page - 1 %}
+                    <a href="?page={{ current_page + 1 }}&order-by={{ order_by }}&order-type={{ order_type }}"><b>»</b></a>
+                {% else %}
+                    <b>»</b>
+                {% endif %}
+            </p>
+        </div>
+    </section>
+{% endblock %}

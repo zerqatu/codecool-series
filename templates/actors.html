@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+    <section>
+        <h1 class="title text-center">Actors</h1>
+        <div class="card">
+            <p>Create an actors route that displays on each line
+                the first name of the first one hundred actors (ordered by birth date).</p>
+            <p>When you click a name, a list is displayed,
+                with all the shows the actor played in.</p>
+            <p>Think of a solution which puts a minimum use
+                on the database resources and at the same time is not too complicated.
+            </p>
+        </div>
+        <div class="card" id="actors"></div>
+    </section>
+    <script src="/static/js/actors.js"></script>
+{% endblock %}
