@@ -128,3 +128,29 @@ def count_entries():
     inner join genres g on sg.genre_id = g.id
     group by s.id
     ''')
+
+
+def common_characters():
+    return data_manager.execute_select('''
+    select sc.character_name, count(sc.character_name) as count
+    from shows s
+    join show_characters sc on s.id = sc.show_id
+    where sc.character_name not like 'Himself%'
+      and sc.character_name not like 'Herself%'
+    and sc.character_name not like 'Host%'
+    and sc.character_name not like 'Narrator%'
+    group by character_name
+    having length(sc.character_name) > 1
+    order by count desc
+    limit 25;
+    ''')
+
+
+def shows_by_character(character_name):
+    return data_manager.execute_select(f'''
+    select string_agg(distinct title, ', ') as show
+    from shows s
+    join show_characters sc on s.id = sc.show_id
+    where sc.character_name = '{character_name}';
+    ''')
+

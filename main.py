@@ -92,9 +92,22 @@ def birthday_actors():
     return render_template('birthday-actors.html', actors=actors)
 
 
+@app.route('/common-characters')
+def common_characters():
+    characters = queries.common_characters()
+    return render_template('common-characters.html', characters=characters)
+
+
+@app.route('/api/common-characters/<name>')
+def api_common_characters(name):
+    shows = queries.shows_by_character(name)
+    return jsonify(shows=shows)
+
+
 def main():
     app.run(debug=False)
 
 
 if __name__ == '__main__':
     main()
+

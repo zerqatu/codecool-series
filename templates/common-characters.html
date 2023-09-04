@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+    <section>
+        <h1 class="title text-center">Common characters</h1>
+        <div class="card">
+            <p>Every communication with the server must use the fetch API.
+            <p>On a new page, list the 25 most common character names in movies.</p>
+            <p>Empty names, Narrators, Hosts, or when the actor/actress played himself/herself do not count.</p>
+            <p>On a right mouse click, it should list the related show titles after the character's name, inside parentheses.</p>
+            <p>When you left-click on a character, it should open up a YouTube search on a new browser tab for that character.</p>
+            p>The URL for such operation is the following:
+https://youtube.com/results?search_query=<character+name></p>
+        </div>
+        <div class="card">
+            <ul>
+                {% for character in characters %}
+                    <li><a href="https://youtube.com/results?search_query={{ character.character_name }}" target="_blank">{{ character.character_name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+    <script src="/static/js/common-character.js"></script>
+{% endblock %}
