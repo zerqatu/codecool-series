@@ -1,9 +1,13 @@
+certifi==2023.7.22
 charset-normalizer==2.0.12
 click==8.0.4
 Flask==2.0.3
+idna==3.4
 itsdangerous==2.1.1
 Jinja2==3.0.3
 MarkupSafe==2.1.0
 psycopg==3.0.12
 python-dotenv==0.13.0
+requests==2.31.0
+urllib3==2.0.4
 Werkzeug==2.0.3
